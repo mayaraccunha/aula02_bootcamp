@@ -1,54 +1,53 @@
 CONSTANTE_BONUS = 1000
 
-# ### Desafio - Refatorar o projeto da aula anterior evitando Bugs!
-
 # 1) Solicita ao usuário que digite seu nome
-nome_usuario = input("Digite o seu nome: ")
-
-#Verifica os erros
-if nome_usuario.isdigit():
-    print("Você digitou seu nome errado")
-    exit()
-elif len(nome_usuario) == 0:
-    print("Você não digitou nada")
-    exit()
-elif nome_usuario.isspace():
-    print("Você só digitou espaço")
-    exit()
-
-#Verifica se o nome tá vazio
-if len(nome) == 0:
+try:
+    nome_usuario = input("Digite o seu nome: ")
+    
+    # Verifica se o nome está vazio
+    if len(nome_usuario) == 0:
         raise ValueError("O nome não pode estar vazio.")
+    
     # Verifica se há números no nome
-elif any(char.isdigit() for char in nome):
+    elif any(char.isdigit() for char in nome_usuario):
         raise ValueError("O nome não deve conter números.")
-else:
-        print("Nome válido:", nome)
+    
+    # Verifica se só tem espaços
+    elif nome_usuario.isspace():
+        raise ValueError("Você só digitou espaço.")
+        
+    else:
+        print("Nome válido:", nome_usuario)
+
 except ValueError as e:
     print(e)
+    exit()
 
 # 2) Solicita ao usuário que digite o valor do seu salário
-# Converte a entrada para um número de ponto flutuante
 try:
     salario = float(input("Digite o valor do seu salário: "))
     if salario < 0:
         print("Por favor, digite um valor positivo para o salário.")
+        exit()
 except ValueError:
     print("Entrada inválida para o salário. Por favor, digite um número.")
+    exit()
 
 # 3) Solicita ao usuário que digite o valor do bônus recebido
-# Converte a entrada para um número de ponto flutuante
 try:
     bonus_recebido = float(input("Digite o valor do bônus recebido: "))
     if bonus_recebido < 0:
         print("Por favor, digite um valor positivo para o bônus.")
+        exit()
 except ValueError:
     print("Entrada inválida para o bônus. Por favor, digite um número.")
+    exit()
 
-# Assumindo uma lógica de cálculo para o bônus final e KPI
-bonus_final = bonus_recebido * 1.2  # Exemplo, ajuste conforme necessário
-kpi = (salario + bonus_final) / 1000  # Exemplo simples de KPI
+# Lógica de cálculo
+bonus_final = bonus_recebido * 1.2 
+kpi = (salario + bonus_final) / 1000 
 
-# Imprime as informações para o usuário
+# Imprime as informações
 print(f"Seu KPI é: {kpi:.2f}")
-print(f"{nome}, seu salário é R${salario:.2f} e seu bônus final é R${bonus_final:.2f}."
+# ATENÇÃO: Aqui faltava um parênteses no final
+print(f"{nome_usuario}, seu salário é R${salario:.2f} e seu bônus final é R${bonus_final:.2f}.")
